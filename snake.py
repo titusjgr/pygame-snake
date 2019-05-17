@@ -2,8 +2,8 @@ from pygame.locals import *
 import pygame
 import random
 
-SCREEN_SIZE = 600, 480
-MAP_SIZE = 60, 48 # This is the map for snake coordination.
+SCREEN_SIZE = 320, 320
+MAP_SIZE = 32, 32 # This is the map for snake coordination.
 SNAKE_SIZE = 10 # This indicates how big a block of the snake looks.
 INITIAL_LENGTH = 4
 BLACK = (  0  ,  0  ,  0  )
@@ -59,6 +59,7 @@ class Snake():
         new_head = (self.positions[0][0] + update_tuple[0], self.positions[0][1] + update_tuple[1])
         
         self.positions.insert(0, new_head)
+        reward = 0
 
         if new_head == self.food_position:
             self.food_position = self.generate_food()

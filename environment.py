@@ -4,8 +4,8 @@ import pygame
 import random
 import numpy as np
 
-SCREEN_SIZE = 600, 480
-MAP_SIZE = 60, 48 # This is the map for snake coordination.
+SCREEN_SIZE = 320, 320
+MAP_SIZE = 32, 32 # This is the map for snake coordination.
 SNAKE_SIZE = 10 # This indicates how big a block of the snake looks.
 INITIAL_LENGTH = 4
 BLACK = (  0  ,  0  ,  0  )
