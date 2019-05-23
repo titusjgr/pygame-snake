@@ -1,8 +1,3 @@
-# 1. Now it wait for a long time before turning => Use higher FPS
-# 2. It fails to determine whether the move is valid => Hand-coded rules
-# 3. Let's generate food to help the snake grow! => Deleting the last position
-# 4. Now collide with itself => Head in body positions
-
 from pygame.locals import *
 import pygame
 import random
@@ -45,7 +40,7 @@ while snake.alive:
                 
 
     # Display score
-    pygame.display.set_caption('Snake\t\tScore:{}'.format(snake.score))
+    pygame.display.set_caption('Snake       Score:{}'.format(snake.score))
 
     # Update snake position
     snake.update()
