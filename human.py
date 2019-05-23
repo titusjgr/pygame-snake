@@ -40,7 +40,7 @@ while snake.alive:
                 
 
     # Display score
-    pygame.display.set_caption('Snake       Score:{}'.format(snake.score))
+    pygame.display.set_caption('Snake | Score:{}'.format(snake.score))
 
     # Update snake position
     snake.update()
