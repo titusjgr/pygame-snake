@@ -48,11 +48,13 @@ class ReplayMemory():
 
         Returns a batch containing "batch_size" samples,
         where each sample consists of num_frames.'''
-        indices = [randrange(num_frames - 1) for _ in range(batch_size)]
+        indices = [randrange(num_frames - 1, len(self.memory))
+                   for _ in range(batch_size)]
         transition_batch = []
 
         for index in indices:
-            stacked_state = self.memory[index - num_frames + 1: index + 1]
+            stacked_state = tuple(
+                zip(*self.memory[index - num_frames + 1: index + 1]))[0]
             transition_batch.append([stacked_state] + self.memory[index][1:])
 
         return transition_batch
