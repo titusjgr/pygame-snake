@@ -1,16 +1,16 @@
-from pygame.locals import *
+from pygame.locals import QUIT, KEYDOWN, K_ESCAPE
 import pygame
 import random
 from snake import Snake
 
 
 SCREEN_SIZE = 320, 320
-MAP_SIZE = 32, 32 # This is the map for snake coordination.
-SNAKE_SIZE = 10 # This indicates how big a block of the snake looks.
+MAP_SIZE = 32, 32  # This is the map for snake coordination.
+SNAKE_SIZE = 10  # This indicates how big a block of the snake looks.
 INITIAL_LENGTH = 4
-BLACK = (  0  ,  0  ,  0  )
-WHITE = ( 255 , 255 , 255 )
-GREEN = (  0  , 255 ,  0  )
+BLACK = (0,  0,  0)
+WHITE = (255, 255, 255)
+GREEN = (0, 255,  0)
 FPS = 15
 
 
@@ -37,15 +37,14 @@ while snake.alive:
             direction = snake.key_to_direction[event.key]
             if direction is not snake.invalid_direction:
                 snake.direction = direction
-                
 
     # Display score
     pygame.display.set_caption('Snake | Score:{}'.format(snake.score))
 
     # Update snake position
     snake.update()
-    
-    # Draw things 
+
+    # Draw things
     snake.draw_body()
     snake.draw_food()
 
