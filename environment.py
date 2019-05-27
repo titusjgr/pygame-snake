@@ -26,8 +26,13 @@ class Environment():
         This way we may use it as input to neural network'''
 
         frame = zeros(MAP_SIZE)
+
+        if self.snake.alive is False:
+            self.snake.positions.pop(0)
+
         for pos in self.snake.positions:
             frame[pos] = -1
+
         frame[self.snake.food_position] = 1
 
         self.frames.append(frame)
