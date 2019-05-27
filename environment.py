@@ -1,6 +1,5 @@
 from snake import Snake
 from numpy import zeros, stack
-import pygame
 import random
 
 SCREEN_SIZE = 320, 320
@@ -55,5 +54,3 @@ class Environment():
 
         #      next state, reward, done
         return next_state, reward, not self.snake.alive
-
-    pygame.quit()
