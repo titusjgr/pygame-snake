@@ -1,3 +1,6 @@
 *.docx
 ckpt/*.hdf5
 *.pyc
+test*.py
+*.ipynb
+pygame_example.py
