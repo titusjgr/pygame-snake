@@ -2,7 +2,8 @@ from argparse import ArgumentParser
 from os import listdir
 from random import randint, random, sample
 
-from numpy import argmax, array, min, newaxis
+from numpy import argmax, array, min, newaxis, mean
+from matplotlib.pyplot import plot, show
 from pygame.locals import *
 from tensorflow.keras.layers import Conv2D, Dense, Flatten
 from tensorflow.keras.models import Sequential
@@ -131,7 +132,8 @@ def update_parameters():
             target[i][action] += DISCOUNT_FACTOR * \
                 q_batch[i][next_action_batch[i]]
 
-    main_q_network.train_on_batch(state_batch, target)
+    # return the loss
+    return main_q_network.train_on_batch(state_batch, target)
 
 
 replaymemory = ReplayMemory(MEMORY_CAPACITY)
@@ -141,12 +143,15 @@ step = 0
 target_q_network = build_q_network()
 main_q_network = build_q_network()
 
-load_ckpt_filename = args.ckptfn
+load_ckpt_filename = args.ckptfilename
 if load_ckpt_filename is not None:
     main_q_network.load_weights('ckpt/' + load_ckpt_filename)
 target_q_network.set_weights(main_q_network.get_weights())
 
 main_q_network.compile(optimizer='rmsprop', loss='mse')
+
+loss_history = []
+q_history = []
 
 for episode in range(EPISODES):
     env = Environment()
@@ -160,11 +165,12 @@ for episode in range(EPISODES):
         replaymemory.push(state, action, reward, next_state, done)
 
         # Update parameters
-        update_parameters()
+        loss_history.append(update_parameters())
 
         # Periodically copy weights to target network
         if step % COPY_STEPS == 0:
             target_q_network.set_weights(main_q_network.get_weights())
+            q_history.append(mean(target_q_network.predict(state[newaxis, :])))
 
         step += 1
         game_steps += 1
@@ -173,3 +179,7 @@ for episode in range(EPISODES):
     checkpoint_filename = 'ckpt/num{}-steps{}-score{}.hdf5'.format(
         len(listdir('ckpt')), game_steps, env.snake.score)
     main_q_network.save_weights(checkpoint_filename)
+
+plot(loss_history)
+plot(q_history)
+show()
