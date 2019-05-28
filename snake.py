@@ -85,7 +85,7 @@ class Snake():
                 or not (0 <= new_head[0] < MAP_SIZE[0]) \
                 or not (0 <= new_head[1] < MAP_SIZE[1]):
             self.alive = False
-            reward = -1
+            reward = -3
 
         else:
             self.positions.pop()
