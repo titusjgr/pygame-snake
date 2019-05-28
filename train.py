@@ -2,8 +2,8 @@ from argparse import ArgumentParser
 from os import listdir
 from random import randint, random, sample
 
-from numpy import argmax, array, min, newaxis, mean
-from matplotlib.pyplot import plot, show
+from matplotlib.pyplot import plot, show, subplot, title
+from numpy import argmax, array, mean, min, newaxis
 from pygame.locals import *
 from tensorflow.keras.layers import Conv2D, Dense, Flatten
 from tensorflow.keras.models import Sequential
@@ -180,6 +180,9 @@ for episode in range(EPISODES):
         len(listdir('ckpt')), game_steps, env.snake.score)
     main_q_network.save_weights(checkpoint_filename)
 
+subplot(211)
 plot(loss_history)
+title('loss')
+subplot(212)
 plot(q_history)
-show()
+show('q value')
