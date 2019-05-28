@@ -1,5 +1,5 @@
 from snake import Snake
-from numpy import zeros, stack
+from numpy import zeros, stack, pad
 import random
 
 SCREEN_SIZE = 320, 320
@@ -13,9 +13,9 @@ NUM_FRAMES = 4  # num of frames used as input state at a time
 
 
 class Environment():
-    def __init__(self):
+    def __init__(self, background=None):
         # Basic setup
-        self.snake = Snake(None)  # Not gonna use background
+        self.snake = Snake(background)
         # Stack NUM_FRAMES as a state
         self.frames = [zeros(MAP_SIZE) for _ in range(NUM_FRAMES - 1)]
 
@@ -39,7 +39,9 @@ class Environment():
         state = stack(self.frames, axis=-1)
         self.frames.pop(0)
 
-        return state
+        # Pad the map with -1 denoting the wall
+        return pad(state, ((1, 1), (1, 1), (0, 0)),
+                   'constant', constant_values=-1)
 
     def step(self, action):
         '''A step of the environment
