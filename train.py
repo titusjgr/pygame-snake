@@ -1,27 +1,53 @@
-# Haven't implemented:
-# 1. Loss function
-# 2. Training loop
-
-from random import random, sample, randint
+from argparse import ArgumentParser
 from os import listdir
+from random import randint, random, sample
 
-from numpy import argmax, min, array, newaxis
+from numpy import argmax, array, min, newaxis
 from pygame.locals import *
 from tensorflow.keras.layers import Conv2D, Dense, Flatten
 from tensorflow.keras.models import Sequential
 
 from environment import Environment
 
-EPSILON_START = 1
-EPSILON_END = 0.1
-EPSILON_LOWERING_STEPS = 10000000
+parser = ArgumentParser(
+    usage='python [-eps start_eps end_eps eps_decay_steps] [-episode num_of_episodes] \
+    [-lw checkpoint_filename]',
+    description='Train the DQN'
+)
+parser.add_argument(
+    '--epsilon',
+    nargs=3,
+    metavar=('start_eps', 'end_eps', 'eps_decay_steps'),
+    help='''specify intended epsilon value for epsilon-greedy
+    the epsilon value will go from start_eps to end_eps
+    in "eps_decay_steps" steps''',
+    dest='epsilon',
+    default=[1, 0.1, 1000000],
+    type=float,
+)
+parser.add_argument(
+    '--episodes',
+    help='specify the number of episodes to run',
+    dest='episodes',
+    default=10000,
+    type=int,
+)
+parser.add_argument(
+    '-lw',
+    help='load weights from hdf5 file',
+    dest='ckptfilename',
+    default=None,
+)
+args = parser.parse_args()
+
+EPSILON_START, EPSILON_END, EPSILON_LOWERING_STEPS = args.epsilon
+EPISODES = args.episodes
 DISCOUNT_FACTOR = 0.97
 COPY_STEPS = 100
 
 NUM_ACTIONS = 4
 NUM_FRAMES = 4  # num of frames used as input state at a time
-BATCH_SIZE = 5
-EPISODES = 1000
+BATCH_SIZE = 64
 MEMORY_CAPACITY = 4000
 
 
@@ -111,8 +137,14 @@ def update_parameters():
 replaymemory = ReplayMemory(MEMORY_CAPACITY)
 step = 0
 
+
 target_q_network = build_q_network()
 main_q_network = build_q_network()
+
+load_ckpt_filename = args.ckptfn
+if load_ckpt_filename is not None:
+    main_q_network.load_weights('ckpt/' + load_ckpt_filename)
+target_q_network.set_weights(main_q_network.get_weights())
 
 main_q_network.compile(optimizer='rmsprop', loss='mse')
 
