@@ -4,3 +4,4 @@ ckpt/*.hdf5
 test*.py
 *.ipynb
 pygame_example.py
+*.png
