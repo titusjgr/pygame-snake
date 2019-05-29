@@ -17,7 +17,7 @@ GREEN = (0, 255,  0)
 
 def build_q_network():
     model = Sequential()
-    model.add(Conv2D(16, (4, 4), strides=(2, 2), activation='elu',
+    model.add(Conv2D(16, (4, 4), activation='elu',
                      input_shape=(34, 34, NUM_FRAMES)))
     model.add(Conv2D(32, (2, 2), activation='elu'))
     model.add(Conv2D(32, (2, 2), activation='elu'))
