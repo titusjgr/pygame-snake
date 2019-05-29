@@ -59,7 +59,7 @@ INPUT_SHAPE = MAP_SIZE[0] + 2, MAP_SIZE[1] + 2, NUM_FRAMES
 
 def build_q_network():
     model = Sequential()
-    model.add(Conv2D(16, (4, 4), strides=(2, 2), activation='elu',
+    model.add(Conv2D(16, (4, 4), activation='elu',
                      input_shape=INPUT_SHAPE))
     model.add(Conv2D(32, (2, 2), activation='elu'))
     model.add(Conv2D(32, (2, 2), activation='elu'))
