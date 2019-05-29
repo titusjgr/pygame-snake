@@ -9,7 +9,7 @@ from pygame.locals import *
 from tensorflow.keras.layers import Conv2D, Dense, Flatten
 from tensorflow.keras.models import Sequential
 
-from config import MAP_SIZE, NUM_FRAMES, DISCOUNT_FACTOR
+from config import MAP_SIZE, NUM_FRAMES, DISCOUNT_FACTOR, INPUT_SHAPE
 from environment import Environment
 
 start_time = time.time()
@@ -53,8 +53,6 @@ COPY_STEPS = 100
 NUM_ACTIONS = 4
 BATCH_SIZE = 64
 MEMORY_CAPACITY = 4000
-
-INPUT_SHAPE = MAP_SIZE[0] + 2, MAP_SIZE[1] + 2, NUM_FRAMES
 
 
 def build_q_network():

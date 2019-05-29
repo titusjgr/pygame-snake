@@ -1,4 +1,4 @@
-import random
+from argparse import ArgumentParser
 
 import pygame
 from numpy import argmax
@@ -7,7 +7,7 @@ from tensorflow.keras.layers import Conv2D, Dense, Flatten
 from tensorflow.keras.models import Sequential
 
 from config import (FPS, INITIAL_LENGTH, MAP_SIZE, NUM_FRAMES, SCREEN_SIZE,
-                    SNAKE_SIZE)
+                    SNAKE_SIZE, INPUT_SHAPE)
 from environment import Environment
 
 BLACK = (0,  0,  0)
@@ -18,7 +18,7 @@ GREEN = (0, 255,  0)
 def build_q_network():
     model = Sequential()
     model.add(Conv2D(16, (4, 4), activation='elu',
-                     input_shape=(34, 34, NUM_FRAMES)))
+                     input_shape=INPUT_SHAPE))
     model.add(Conv2D(32, (2, 2), activation='elu'))
     model.add(Conv2D(32, (2, 2), activation='elu'))
     model.add(Flatten())
@@ -30,16 +30,17 @@ def build_q_network():
 
 parser = ArgumentParser(
     usage='python play_dqn.py checkpoint_filename',
-    description='Train the DQN'
+    description='Train the DQN with specified weights checkpoint\n \
+        checkpoint_filename should be the path relative to current file'
 )
 parser.add_argument(
     help='load weights from hdf5 file',
     dest='ckptfilename',
 )
-args = parser.pars
+args = parser.parse_args()
 
 q_network = build_q_network()
-q_network.load_weights('ckpt/')
+q_network.load_weights(args.ckptfilename)
 
 # Basic setup
 pygame.init()
@@ -50,6 +51,7 @@ clock = pygame.time.Clock()
 background = pygame.Surface(screen.get_size()).convert()
 
 env = Environment(background)
+state = env.positions_to_image()
 
 done = False
 # Main loop
@@ -66,8 +68,8 @@ while not done:
     pygame.display.set_caption('Snake | Score:{}'.format(env.snake.score))
 
     # Update snake position
-    action = argmax()
-    env.step()
+    action = argmax(q_network.predict(state))
+    state, reward, done = env.step(action)
 
     # Draw things
     env.snake.draw_body()
