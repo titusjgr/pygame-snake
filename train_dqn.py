@@ -50,6 +50,7 @@ parser.add_argument(
     help='learning rate',
     dest='learning_rate',
     default=0.001,
+    type=float
 )
 args = parser.parse_args()
 
