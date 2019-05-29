@@ -1,14 +1,15 @@
+import time
 from argparse import ArgumentParser
 from os import listdir
 from random import randint, random, sample
 
-from matplotlib.pyplot import plot, show, subplot, title, savefig
+from matplotlib.pyplot import plot, savefig, show, subplot, title
 from numpy import argmax, array, mean, min, newaxis
 from pygame.locals import *
 from tensorflow.keras.layers import Conv2D, Dense, Flatten
 from tensorflow.keras.models import Sequential
 
-from config import NUM_FRAMES, MAP_SIZE
+from config import MAP_SIZE, NUM_FRAMES
 from environment import Environment
 
 start_time = time.time()
