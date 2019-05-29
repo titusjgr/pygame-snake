@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from os import listdir
 from random import randint, random, sample
 
-from matplotlib.pyplot import plot, show, subplot, title
+from matplotlib.pyplot import plot, show, subplot, title, savefig
 from numpy import argmax, array, mean, min, newaxis
 from pygame.locals import *
 from tensorflow.keras.layers import Conv2D, Dense, Flatten
@@ -10,6 +10,8 @@ from tensorflow.keras.models import Sequential
 
 from config import NUM_FRAMES, MAP_SIZE
 from environment import Environment
+
+start_time = time.time()
 
 parser = ArgumentParser(
     usage='python train.py [-eps start_eps end_eps eps_decay_steps] \
@@ -183,9 +185,12 @@ for episode in range(EPISODES):
         len(listdir('ckpt')), game_steps, env.snake.score)
     main_q_network.save_weights(checkpoint_filename)
 
+print('Time used:', time.time() - start_time)
+
 subplot(211)
 plot(loss_history)
 title('loss')
 subplot(212)
 plot(q_history)
-show('q value')
+title('q value')
+savefig('loss-plot/' + str(int(time.time()))+'.png')
