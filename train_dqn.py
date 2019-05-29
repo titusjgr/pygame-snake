@@ -167,39 +167,45 @@ main_q_network.compile(
 loss_history = []
 q_history = []
 
-for episode in range(EPISODES):
-    env = Environment()
-    state = env.positions_to_image()
-    done = False
-    game_steps = 0
-    while not done:
-        # Choose an action and transform to the next state
-        action = epsilon_greedy(EPSILON_START, EPSILON_END, step, state)
-        next_state, reward, done = env.step(action)
-        replaymemory.push(state, action, reward, next_state, done)
+try:
+    for episode in range(EPISODES):
+        env = Environment()
+        state = env.positions_to_image()
+        done = False
+        game_steps = 0
+        while not done:
+            # Choose an action and transform to the next state
+            action = epsilon_greedy(EPSILON_START, EPSILON_END, step, state)
+            next_state, reward, done = env.step(action)
+            replaymemory.push(state, action, reward, next_state, done)
 
-        # Update parameters
-        loss_history.append(update_parameters())
+            # Update parameters
+            loss_history.append(update_parameters())
 
-        # Periodically copy weights to target network
-        if step % COPY_STEPS == 0:
-            target_q_network.set_weights(main_q_network.get_weights())
-            q_history.append(mean(target_q_network.predict(state[newaxis, :])))
+            # Periodically copy weights to target network
+            if step % COPY_STEPS == 0:
+                target_q_network.set_weights(main_q_network.get_weights())
+                q_history.append(
+                    mean(target_q_network.predict(state[newaxis, :])))
 
-        step += 1
-        game_steps += 1
+            step += 1
+            game_steps += 1
 
-    print('Score:', env.snake.score, 'Episode:', episode)
-    checkpoint_filename = 'ckpt/num{}-steps{}-score{}.hdf5'.format(
-        len(listdir('ckpt')), game_steps, env.snake.score)
-    main_q_network.save_weights(checkpoint_filename)
+        print('Score:', env.snake.score, 'Episode:', episode)
+        checkpoint_filename = 'ckpt/num{}-steps{}-score{}.h5'.format(
+            len(listdir('ckpt')), game_steps, env.snake.score)
+        main_q_network.save_weights(checkpoint_filename)
 
-print('Time used:', time.time() - start_time)
+except:
+    pass
+finally:
+    print('Time used:', time.time() - start_time)
 
-subplot(211)
-plot(loss_history)
-title('loss')
-subplot(212)
-plot(q_history)
-title('q value')
-savefig('loss-plot/' + str(int(time.time()))+'.png')
+    subplot(211)
+    plot(loss_history)
+    title('loss')
+    subplot(212)
+    plot(q_history)
+    title('q value')
+    savefig('loss-plot/' + str(int(time.time())) +
+            '-lr' + LEARNING_RATE + '.png')
