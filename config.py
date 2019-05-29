@@ -4,3 +4,4 @@ SCREEN_SIZE = MAP_SIZE[0] * SNAKE_SIZE, MAP_SIZE[1] * SNAKE_SIZE
 INITIAL_LENGTH = 4
 FPS = 15
 NUM_FRAMES = 4  # num of frames used as input state at a time
+DISCOUNT_FACTOR = 0.97

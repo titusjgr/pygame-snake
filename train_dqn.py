@@ -9,7 +9,7 @@ from pygame.locals import *
 from tensorflow.keras.layers import Conv2D, Dense, Flatten
 from tensorflow.keras.models import Sequential
 
-from config import MAP_SIZE, NUM_FRAMES
+from config import MAP_SIZE, NUM_FRAMES, DISCOUNT_FACTOR
 from environment import Environment
 
 start_time = time.time()
@@ -48,7 +48,6 @@ args = parser.parse_args()
 
 EPSILON_START, EPSILON_END, EPSILON_LOWERING_STEPS = args.epsilon
 EPISODES = args.episodes
-DISCOUNT_FACTOR = 0.97
 COPY_STEPS = 100
 
 NUM_ACTIONS = 4
