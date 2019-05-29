@@ -178,7 +178,7 @@ for episode in range(EPISODES):
         step += 1
         game_steps += 1
 
-    print('Score:', env.snake.score)
+    print('Score:', env.snake.score, 'Episode:', episode)
     checkpoint_filename = 'ckpt/num{}-steps{}-score{}.hdf5'.format(
         len(listdir('ckpt')), game_steps, env.snake.score)
     main_q_network.save_weights(checkpoint_filename)
