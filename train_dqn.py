@@ -8,6 +8,7 @@ from numpy import argmax, array, mean, min, newaxis
 from pygame.locals import *
 from tensorflow.keras.layers import Conv2D, Dense, Flatten
 from tensorflow.keras.models import Sequential
+from tensorflow.keras.optimizers import RMSprop
 
 from config import MAP_SIZE, NUM_FRAMES, DISCOUNT_FACTOR, INPUT_SHAPE
 from environment import Environment
@@ -44,12 +45,18 @@ parser.add_argument(
     dest='ckptfilename',
     default=None,
 )
+parser.add_argument(
+    '-lr',
+    help='learning rate',
+    dest='learning_rate',
+    default=0.001,
+)
 args = parser.parse_args()
 
 EPSILON_START, EPSILON_END, EPSILON_LOWERING_STEPS = args.epsilon
 EPISODES = args.episodes
 COPY_STEPS = 100
-
+LEARNING_RATE = args.learning_rate
 NUM_ACTIONS = 4
 BATCH_SIZE = 64
 MEMORY_CAPACITY = 4000
@@ -151,7 +158,10 @@ if load_ckpt_filename is not None:
     main_q_network.load_weights(load_ckpt_filename)
 target_q_network.set_weights(main_q_network.get_weights())
 
-main_q_network.compile(optimizer='rmsprop', loss='mse')
+main_q_network.compile(
+    optimizer=RMSprop(lr=LEARNING_RATE),
+    loss='mse'
+)
 
 loss_history = []
 q_history = []
