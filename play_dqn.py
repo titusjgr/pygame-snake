@@ -1,21 +1,18 @@
-from pygame.locals import QUIT, KEYDOWN, K_ESCAPE
-import pygame
 import random
-from environment import Environment
+
+import pygame
 from numpy import argmax
+from pygame.locals import K_ESCAPE, KEYDOWN, QUIT
 from tensorflow.keras.layers import Conv2D, Dense, Flatten
 from tensorflow.keras.models import Sequential
 
+from config import (FPS, INITIAL_LENGTH, MAP_SIZE, NUM_FRAMES, SCREEN_SIZE,
+                    SNAKE_SIZE)
+from environment import Environment
 
-SCREEN_SIZE = 320, 320
-MAP_SIZE = 32, 32  # This is the map for snake coordination.
-SNAKE_SIZE = 10  # This indicates how big a block of the snake looks.
-NUM_FRAMES = 4
-INITIAL_LENGTH = 4
 BLACK = (0,  0,  0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255,  0)
-FPS = 15
 
 
 def build_q_network():

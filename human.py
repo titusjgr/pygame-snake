@@ -2,16 +2,12 @@ from pygame.locals import QUIT, KEYDOWN, K_ESCAPE
 import pygame
 import random
 from snake import Snake
+from config import SCREEN_SIZE, MAP_SIZE, SNAKE_SIZE, INITIAL_LENGTH, FPS
 
-
-SCREEN_SIZE = 320, 320
-MAP_SIZE = 32, 32  # This is the map for snake coordination.
-SNAKE_SIZE = 10  # This indicates how big a block of the snake looks.
 INITIAL_LENGTH = 4
 BLACK = (0,  0,  0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255,  0)
-FPS = 15
 
 
 # Basic setup
