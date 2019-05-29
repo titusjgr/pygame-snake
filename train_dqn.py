@@ -11,7 +11,7 @@ from tensorflow.keras.models import Sequential
 from environment import Environment
 
 parser = ArgumentParser(
-    usage='python [-eps start_eps end_eps eps_decay_steps] [-episode num_of_episodes] \
+    usage='python train.py [-eps start_eps end_eps eps_decay_steps] [-episode num_of_episodes] \
     [-lw checkpoint_filename]',
     description='Train the DQN'
 )
@@ -55,7 +55,7 @@ MEMORY_CAPACITY = 4000
 def build_q_network():
     model = Sequential()
     model.add(Conv2D(16, (4, 4), strides=(2, 2), activation='elu',
-                     input_shape=(32, 32, NUM_FRAMES)))
+                     input_shape=(34, 34, NUM_FRAMES)))
     model.add(Conv2D(32, (2, 2), activation='elu'))
     model.add(Conv2D(32, (2, 2), activation='elu'))
     model.add(Flatten())
