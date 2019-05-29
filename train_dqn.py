@@ -148,7 +148,7 @@ main_q_network = build_q_network()
 
 load_ckpt_filename = args.ckptfilename
 if load_ckpt_filename is not None:
-    main_q_network.load_weights('ckpt/' + load_ckpt_filename)
+    main_q_network.load_weights(load_ckpt_filename)
 target_q_network.set_weights(main_q_network.get_weights())
 
 main_q_network.compile(optimizer='rmsprop', loss='mse')
