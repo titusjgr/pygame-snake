@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 
 import pygame
-from numpy import argmax
+from numpy import argmax, newaxis
 from pygame.locals import K_ESCAPE, KEYDOWN, QUIT
 from tensorflow.keras.layers import Conv2D, Dense, Flatten
 from tensorflow.keras.models import Sequential
@@ -68,7 +68,7 @@ while not done:
     pygame.display.set_caption('Snake | Score:{}'.format(env.snake.score))
 
     # Update snake position
-    action = argmax(q_network.predict(state))
+    action = argmax(q_network.predict(state[newaxis, :]))
     state, reward, done = env.step(action)
 
     # Draw things
