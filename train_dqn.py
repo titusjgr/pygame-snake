@@ -8,11 +8,13 @@ from pygame.locals import *
 from tensorflow.keras.layers import Conv2D, Dense, Flatten
 from tensorflow.keras.models import Sequential
 
+from config import NUM_FRAMES, MAP_SIZE
 from environment import Environment
 
 parser = ArgumentParser(
-    usage='python train.py [-eps start_eps end_eps eps_decay_steps] [-episode num_of_episodes] \
-    [-lw checkpoint_filename]',
+    usage='python train.py [-eps start_eps end_eps eps_decay_steps] \
+        [-episode num_of_episodes] \
+        [-lw checkpoint_filename]',
     description='Train the DQN'
 )
 parser.add_argument(
@@ -47,15 +49,16 @@ DISCOUNT_FACTOR = 0.97
 COPY_STEPS = 100
 
 NUM_ACTIONS = 4
-NUM_FRAMES = 4  # num of frames used as input state at a time
 BATCH_SIZE = 64
 MEMORY_CAPACITY = 4000
+
+INPUT_SHAPE = MAP_SIZE[0] + 2, MAP_SIZE[1] + 2, NUM_FRAMES
 
 
 def build_q_network():
     model = Sequential()
     model.add(Conv2D(16, (4, 4), strides=(2, 2), activation='elu',
-                     input_shape=(34, 34, NUM_FRAMES)))
+                     input_shape=INPUT_SHAPE))
     model.add(Conv2D(32, (2, 2), activation='elu'))
     model.add(Conv2D(32, (2, 2), activation='elu'))
     model.add(Flatten())
