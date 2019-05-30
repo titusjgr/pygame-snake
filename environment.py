@@ -1,6 +1,6 @@
 import random
 
-from numpy import pad, stack, zeros
+from numpy import stack, zeros
 
 from config import (INITIAL_LENGTH, MAP_SIZE, NUM_FRAMES, SCREEN_SIZE,
                     SNAKE_SIZE)
@@ -38,9 +38,7 @@ class Environment():
         state = stack(self.frames, axis=-1)
         self.frames.pop(0)
 
-        # Pad the map with -1 denoting the wall
-        return pad(state, ((1, 1), (1, 1), (0, 0)),
-                   'constant', constant_values=-1)
+        return state
 
     def step(self, action):
         '''A step of the environment
