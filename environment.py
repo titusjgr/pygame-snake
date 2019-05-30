@@ -1,10 +1,9 @@
+from snake import Snake
 import random
 
 from numpy import stack, zeros
 
-from config import (INITIAL_LENGTH, MAP_SIZE, NUM_FRAMES, SCREEN_SIZE,
-                    SNAKE_SIZE)
-from snake import Snake
+from config import NUM_FRAMES, SCREEN_SIZE, SNAKE_SIZE
 
 BLACK = (0,  0,  0)
 WHITE = (255, 255, 255)
@@ -16,7 +15,7 @@ class Environment():
         # Basic setup
         self.snake = Snake(background)
         # Stack NUM_FRAMES as a state
-        self.frames = [zeros(MAP_SIZE) for _ in range(NUM_FRAMES - 1)]
+        self.frames = [zeros(SCREEN_SIZE) for _ in range(NUM_FRAMES - 1)]
 
     def positions_to_image(self):
         '''Turn position info into an image
@@ -24,15 +23,18 @@ class Environment():
         Turn position information into a image.
         This way we may use it as input to neural network'''
 
-        frame = zeros(MAP_SIZE)
+        frame = zeros(SCREEN_SIZE)
 
         if self.snake.alive is False:
             self.snake.positions.pop(0)
 
-        for pos in self.snake.positions:
-            frame[pos] = -1
+        for x, y in self.snake.positions:
+            frame[x * SNAKE_SIZE: (x + 1) * SNAKE_SIZE,
+                  y * SNAKE_SIZE: (y + 1) * SNAKE_SIZE] = -1
 
-        frame[self.snake.food_position] = 1
+        x, y = self.snake.food_position
+        frame[x * SNAKE_SIZE: (x + 1) * SNAKE_SIZE,
+              y * SNAKE_SIZE: (y + 1) * SNAKE_SIZE] = 1
 
         self.frames.append(frame)
         state = stack(self.frames, axis=-1)
