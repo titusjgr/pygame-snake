@@ -65,7 +65,7 @@ while not done:
             env.snake.alive = False
 
     # Display score
-    pygame.display.set_caption('Snake | Score:{}'.format(env.snake.score))
+    pygame.display.set_caption(str(env.snake.score))
 
     # Update snake position
     action = argmax(q_network.predict(state[newaxis, :]))
@@ -82,5 +82,5 @@ while not done:
     # FPS
     clock.tick(FPS)
 
-
+print("Your score is", snake.score)
 pygame.quit()

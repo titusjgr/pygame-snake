@@ -36,7 +36,7 @@ while snake.alive:
                 snake.direction = direction
 
     # Display score
-    pygame.display.set_caption('Snake | Score:{}'.format(snake.score))
+    pygame.display.set_caption(str(snake.score))
 
     # Update snake position
     snake.update()
@@ -52,5 +52,5 @@ while snake.alive:
     # FPS
     clock.tick(FPS)
 
-
+print("Your score is", snake.score)
 pygame.quit()
