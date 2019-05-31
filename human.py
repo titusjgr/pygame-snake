@@ -1,4 +1,4 @@
-from pygame.locals import QUIT, KEYDOWN, K_ESCAPE
+from pygame.locals import QUIT, KEYDOWN, K_ESCAPE, K_SPACE
 import pygame
 import random
 from snake import Snake
@@ -34,6 +34,18 @@ while snake.alive:
             direction = snake.key_to_direction[event.key]
             if direction is not snake.invalid_direction:
                 snake.direction = direction
+
+        elif event.type == KEYDOWN and event.key == K_SPACE:
+            pause = True
+            while pause:
+                for event in pygame.event.get():
+                    if event.type == QUIT or \
+                            (event.type == KEYDOWN and event.key == K_ESCAPE):
+                        snake.alive = False
+                        pause = False
+                    elif event.type == KEYDOWN and event.key == K_SPACE:
+                        pause = False
+                clock.tick(FPS)
 
     # Display score
     pygame.display.set_caption(str(snake.score))

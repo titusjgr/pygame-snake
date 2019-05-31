@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 
 import pygame
 from numpy import argmax, newaxis
-from pygame.locals import K_ESCAPE, KEYDOWN, QUIT
+from pygame.locals import K_ESCAPE, KEYDOWN, QUIT, K_SPACE
 from tensorflow.keras.layers import Conv2D, Dense, Flatten
 from tensorflow.keras.models import Sequential
 
@@ -63,6 +63,18 @@ while not done:
         if event.type == QUIT or \
                 (event.type == KEYDOWN and event.key == K_ESCAPE):
             env.snake.alive = False
+
+        elif event.type == KEYDOWN and event.key == K_SPACE:
+            pause = True
+            while pause:
+                for event in pygame.event.get():
+                    if event.type == QUIT or \
+                            (event.type == KEYDOWN and event.key == K_ESCAPE):
+                        snake.alive = False
+                        pause = False
+                    elif event.type == KEYDOWN and event.key == K_SPACE:
+                        pause = False
+                clock.tick(FPS)
 
     # Display score
     pygame.display.set_caption(str(env.snake.score))
