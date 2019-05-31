@@ -1,14 +1,13 @@
 # Snake game
 
-This is just a simple snake game without AI.
+This is just a simple snake game.
 
-## Dependencies
+## Install Dependencies
 
-pygame
-
-## Details
-
-None.
+`pip install numpy`
+`pip install matplotlib`
+`pip install pygame`
+`pip install tensorflow==2.0.0a0`
 
 ## Structure
 
@@ -18,6 +17,6 @@ Human-playable game is in `human.py`.
 
 The environment for the network to interact with is `environment.py`.
 
-The neural network training script is `train.py`.
+The neural network training script is `train_dqn.py`.
 
-Finally, to see DQN played game, execute `ai.py`.
+Finally, to see DQN playing game, execute `play_dqn.py`.
