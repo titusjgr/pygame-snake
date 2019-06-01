@@ -94,5 +94,5 @@ while not done:
     # FPS
     clock.tick(FPS)
 
-print("Your score is", snake.score)
+print("Your score is", env.snake.score)
 pygame.quit()
