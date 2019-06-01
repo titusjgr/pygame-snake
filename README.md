@@ -5,9 +5,9 @@ This is just a simple snake game.
 ## Install Dependencies
 
 ```
-pip install numpy <br/>
-pip install matplotlib <br/>
-pip install pygame <br/>
+pip install numpy
+pip install matplotlib
+pip install pygame
 pip install tensorflow==2.0.0a0
 ```
 
