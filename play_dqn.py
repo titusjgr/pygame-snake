@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+from os import environ
 
 import pygame
 from numpy import argmax, newaxis
@@ -9,6 +10,9 @@ from tensorflow.keras.models import Sequential
 from config import (FPS, INITIAL_LENGTH, MAP_SIZE, NUM_FRAMES, SCREEN_SIZE,
                     SNAKE_SIZE, INPUT_SHAPE)
 from environment import Environment
+
+environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS'
+environ['CUDA_VISIBLE_DEVICES'] = ''
 
 BLACK = (0,  0,  0)
 WHITE = (255, 255, 255)
@@ -56,6 +60,7 @@ state = env.positions_to_image()
 done = False
 # Main loop
 while not done:
+    print('roar')
     # Reset screen
     background.fill(BLACK)
 
