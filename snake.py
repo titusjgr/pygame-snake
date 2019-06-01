@@ -31,7 +31,7 @@ class Snake():
 
         # Every part of the snakes body
         self.positions = [
-            (MAP_SIZE[0] // 2 - i, MAP_SIZE[1] // 2)
+            (0, MAP_SIZE[1] // 2)
             for i in range(INITIAL_LENGTH)
         ]
 
