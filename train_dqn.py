@@ -43,7 +43,7 @@ parser.add_argument(
 parser.add_argument(
     '-lw',
     help='load weights from hdf5 file',
-    dest='ckptfilename',
+    dest='ckptfilepath',
     default=None,
 )
 parser.add_argument(
@@ -155,9 +155,9 @@ step = 0
 target_q_network = build_q_network()
 main_q_network = build_q_network()
 
-load_ckpt_filename = args.ckptfilename
-if load_ckpt_filename is not None:
-    main_q_network.load_weights(load_ckpt_filename)
+load_ckpt_filepath = args.ckptfilepath
+if load_ckpt_filepath is not None:
+    main_q_network.load_weights(load_ckpt_filepath)
 target_q_network.set_weights(main_q_network.get_weights())
 
 main_q_network.compile(
@@ -193,9 +193,9 @@ for episode in range(EPISODES):
         game_steps += 1
 
     print('Score:', env.snake.score, 'Episode:', episode)
-    checkpoint_filename = 'ckpt/num{}-steps{}-score{}.h5'.format(
+    checkpoint_filepath = 'ckpt/num{}-steps{}-score{}.h5'.format(
         len(listdir('ckpt')), game_steps, env.snake.score)
-    main_q_network.save_weights(checkpoint_filename)
+    main_q_network.save_weights(checkpoint_filepath)
 
 print('Time used:', time.time() - start_time)
 
