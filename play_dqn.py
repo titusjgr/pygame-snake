@@ -7,12 +7,10 @@ from pygame.locals import K_ESCAPE, KEYDOWN, QUIT, K_SPACE
 from tensorflow.keras.layers import Conv2D, Dense, Flatten
 from tensorflow.keras.models import Sequential
 
-from config import (FPS, INITIAL_LENGTH, MAP_SIZE, NUM_FRAMES, SCREEN_SIZE,
+from config import (FPS, INITIAL_LENGTH, MAP_SIZE, NUM_FRAMES, DISPLAY_SIZE,
                     SNAKE_SIZE, INPUT_SHAPE)
 from environment import Environment
 
-environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS'
-environ['CUDA_VISIBLE_DEVICES'] = ''
 
 BLACK = (0,  0,  0)
 WHITE = (255, 255, 255)
@@ -48,7 +46,7 @@ q_network.load_weights(args.ckptfilepath)
 
 # Basic setup
 pygame.init()
-screen = pygame.display.set_mode(SCREEN_SIZE)
+screen = pygame.display.set_mode(DISPLAY_SIZE)
 pygame.display.set_caption('Snake')
 clock = pygame.time.Clock()
 

@@ -1,5 +1,5 @@
 from pygame.locals import *
-from config import SCREEN_SIZE, MAP_SIZE, SNAKE_SIZE, INITIAL_LENGTH
+from config import SCREEN_SIZE, MAP_SIZE, SNAKE_DISPLAY_SIZE, INITIAL_LENGTH
 import pygame
 import random
 
@@ -94,19 +94,19 @@ class Snake():
     def draw_body(self):
         for position in self.positions:
             pygame.draw.rect(self.background, WHITE, (
-                position[0] * SNAKE_SIZE,
-                position[1] * SNAKE_SIZE,
-                SNAKE_SIZE,
-                SNAKE_SIZE
+                position[0] * SNAKE_DISPLAY_SIZE,
+                position[1] * SNAKE_DISPLAY_SIZE,
+                SNAKE_DISPLAY_SIZE,
+                SNAKE_DISPLAY_SIZE
             )
             )
 
     def draw_food(self):
         pygame.draw.rect(self.background, GREEN, (
-            self.food_position[0] * SNAKE_SIZE,
-            self.food_position[1] * SNAKE_SIZE,
-            SNAKE_SIZE,
-            SNAKE_SIZE
+            self.food_position[0] * SNAKE_DISPLAY_SIZE,
+            self.food_position[1] * SNAKE_DISPLAY_SIZE,
+            SNAKE_DISPLAY_SIZE,
+            SNAKE_DISPLAY_SIZE
         )
         )
 
