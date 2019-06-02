@@ -7,7 +7,7 @@ from pygame.locals import K_ESCAPE, KEYDOWN, QUIT, K_SPACE
 from tensorflow.keras.layers import Conv2D, Dense, Flatten
 from tensorflow.keras.models import Sequential
 
-from config import (FPS, INITIAL_LENGTH, MAP_SIZE, NUM_FRAMES, SCREEN_SIZE,
+from config import (FPS, INITIAL_LENGTH, MAP_SIZE, NUM_FRAMES, DISPLAY_SIZE,
                     SNAKE_SIZE, INPUT_SHAPE)
 from environment import Environment
 
@@ -48,7 +48,7 @@ q_network.load_weights(args.ckptfilepath)
 
 # Basic setup
 pygame.init()
-screen = pygame.display.set_mode(SCREEN_SIZE)
+screen = pygame.display.set_mode(DISPLAY_SIZE)
 pygame.display.set_caption('Snake')
 clock = pygame.time.Clock()
 

@@ -2,7 +2,7 @@ from pygame.locals import QUIT, KEYDOWN, K_ESCAPE, K_SPACE
 import pygame
 import random
 from snake import Snake
-from config import SCREEN_SIZE, MAP_SIZE, SNAKE_SIZE, INITIAL_LENGTH, FPS
+from config import DISPLAY_SIZE, MAP_SIZE, INITIAL_LENGTH, FPS
 
 INITIAL_LENGTH = 4
 BLACK = (0,  0,  0)
@@ -12,7 +12,7 @@ GREEN = (0, 255,  0)
 
 # Basic setup
 pygame.init()
-screen = pygame.display.set_mode(SCREEN_SIZE)
+screen = pygame.display.set_mode(DISPLAY_SIZE)
 pygame.display.set_caption('Snake')
 clock = pygame.time.Clock()
 
