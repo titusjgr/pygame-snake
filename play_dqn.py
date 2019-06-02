@@ -60,7 +60,6 @@ state = env.positions_to_image()
 done = False
 # Main loop
 while not done:
-    print('roar')
     # Reset screen
     background.fill(BLACK)
 
