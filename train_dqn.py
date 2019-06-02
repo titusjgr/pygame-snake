@@ -16,9 +16,10 @@ from environment import Environment
 start_time = time.time()
 
 parser = ArgumentParser(
-    usage='python train.py [-eps start_eps end_eps eps_decay_steps] \
-        [-episode num_of_episodes] \
-        [-lw checkpoint_filename]',
+    usage='python train_dqn.py [--epsilon start_eps end_eps eps_decay_steps] \
+          [--episode num_of_episodes] \
+          [-lw checkpoint_filepath] \
+          [-lr learning_rate]',
     description='Train the DQN'
 )
 parser.add_argument(
