@@ -8,7 +8,7 @@ from tensorflow.keras.layers import Conv2D, Dense, Flatten
 from tensorflow.keras.models import Sequential
 
 from config import (FPS, INITIAL_LENGTH, MAP_SIZE, NUM_FRAMES, DISPLAY_SIZE,
-                    SNAKE_SIZE, INPUT_SHAPE)
+                    INPUT_SHAPE)
 from environment import Environment
 
 
@@ -54,7 +54,6 @@ background = pygame.Surface(screen.get_size()).convert()
 
 env = Environment(background)
 state = env.positions_to_image()
-
 done = False
 # Main loop
 while not done:

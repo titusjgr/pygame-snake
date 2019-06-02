@@ -45,12 +45,12 @@ class Environment():
     def step(self, action):
         '''A step of the environment
 
-        Input one of the four directions: 1, 2, 3, 4 (L, R, U, D).
+        Input one of the four directions: 0, 1, 2, 3 (L, R, U, D).
         Then change the state and return the next state, the reward,
         and whether the episode ends.'''
 
         direction = action
-        if direction is not self.snake.invalid_direction:
+        if direction != self.snake.invalid_direction:
             self.snake.direction = direction
 
         # Update snake position

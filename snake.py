@@ -1,5 +1,5 @@
 from pygame.locals import *
-from config import SCREEN_SIZE, MAP_SIZE, SNAKE_DISPLAY_SIZE, INITIAL_LENGTH
+from config import DISPLAY_SIZE, MAP_SIZE, SNAKE_DISPLAY_SIZE, INITIAL_LENGTH
 import pygame
 import random
 
@@ -31,7 +31,7 @@ class Snake():
 
         # Every part of the snakes body
         self.positions = [
-            (0, MAP_SIZE[1] // 2)
+            (MAP_SIZE[0] // 2 - i, MAP_SIZE[1] // 2)
             for i in range(INITIAL_LENGTH)
         ]
 
@@ -82,7 +82,7 @@ class Snake():
                 or not (0 <= new_head[0] < MAP_SIZE[0]) \
                 or not (0 <= new_head[1] < MAP_SIZE[1]):
             self.alive = False
-            reward = -3
+            reward = -1
 
         else:
             self.positions.pop()
