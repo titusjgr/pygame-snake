@@ -33,18 +33,18 @@ def build_q_network():
 
 
 parser = ArgumentParser(
-    usage='python play_dqn.py checkpoint_filename',
+    usage='python play_dqn.py checkpoint_filepath',
     description='Train the DQN with specified weights checkpoint\n \
-        checkpoint_filename should be the path relative to current file'
+        checkpoint_filepath should be the path relative to current file'
 )
 parser.add_argument(
     help='load weights from hdf5 file',
-    dest='ckptfilename',
+    dest='ckptfilepath',
 )
 args = parser.parse_args()
 
 q_network = build_q_network()
-q_network.load_weights(args.ckptfilename)
+q_network.load_weights(args.ckptfilepath)
 
 # Basic setup
 pygame.init()
