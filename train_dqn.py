@@ -62,6 +62,7 @@ LEARNING_RATE = args.learning_rate
 NUM_ACTIONS = 4
 BATCH_SIZE = 64
 MEMORY_CAPACITY = 4000
+SAVE_EPISODES = 10000
 
 
 def build_q_network():
@@ -192,10 +193,11 @@ for episode in range(EPISODES):
         step += 1
         game_steps += 1
 
-    print('Score:', env.snake.score, 'Episode:', episode)
-    checkpoint_filepath = 'ckpt/num{}-steps{}-score{}.h5'.format(
-        len(listdir('ckpt')), game_steps, env.snake.score)
-    main_q_network.save_weights(checkpoint_filepath)
+    if episode % SAVE_EPISODES:
+        print('Score:', env.snake.score, 'Episode:', episode)
+        checkpoint_filepath = 'ckpt/num{}-steps{}-score{}.h5'.format(
+            len(listdir('ckpt')), game_steps, env.snake.score)
+        main_q_network.save_weights(checkpoint_filepath)
 
 print('Time used:', time.time() - start_time)
 
