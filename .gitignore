@@ -1,5 +1,6 @@
 *.docx
 ckpt/*.h5
+ckpt/saved/*.h5
 *.pyc
 test*.py
 *.ipynb
