@@ -208,4 +208,4 @@ subplot(212)
 plot(q_history)
 title('q value')
 savefig('loss-plot/' + str(int(time.time())) +
-        '-lr' + LEARNING_RATE + '.png')
+        '-lr' + str(LEARNING_RATE) + '.png')
