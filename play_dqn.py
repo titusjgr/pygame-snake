@@ -8,11 +8,7 @@ from tensorflow.keras.layers import Conv2D, Dense, Flatten
 from tensorflow.keras.models import Sequential
 
 from config import (FPS, INITIAL_LENGTH, MAP_SIZE, NUM_FRAMES, DISPLAY_SIZE,
-<<<<<<< HEAD
                     INPUT_SHAPE)
-=======
-                    SNAKE_SIZE, INPUT_SHAPE)
->>>>>>> 4ae90811981d72691afb9937fb071625996f7701
 from environment import Environment
 
 
