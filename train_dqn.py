@@ -193,7 +193,8 @@ for episode in range(EPISODES):
         step += 1
         game_steps += 1
 
-    if episode % SAVE_EPISODES == 0:
+    if (episode % SAVE_EPISODES == 0 and episode != 0) or \
+            episode == EPISODES - 1:
         print('Score:', env.snake.score, 'Episode:', episode)
         checkpoint_filepath = 'ckpt/num{}-steps{}-score{}.h5'.format(
             len(listdir('ckpt')), game_steps, env.snake.score)
