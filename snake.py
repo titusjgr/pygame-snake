@@ -3,9 +3,9 @@ from config import DISPLAY_SIZE, MAP_SIZE, SNAKE_DISPLAY_SIZE, INITIAL_LENGTH
 import pygame
 import random
 
-BLACK = (0,  0,  0)
+BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-GREEN = (0, 255,  0)
+GREEN = (0, 255, 0)
 
 # 0, 1, 2, 3
 # L, R, U, D
@@ -57,10 +57,10 @@ class Snake():
         }
 
         self.move_direction = {
-            0: (-1,  0),
-            1: (1,  0),
+            0: (-1, 0),
+            1: (1, 0),
             2: (0, -1),
-            3: (0,  1)
+            3: (0, 1)
         }
 
     def update(self):

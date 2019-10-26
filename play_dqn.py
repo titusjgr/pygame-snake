@@ -71,7 +71,7 @@ while not done:
                 for event in pygame.event.get():
                     if event.type == QUIT or \
                             (event.type == KEYDOWN and event.key == K_ESCAPE):
-                        snake.alive = False
+                        env.snake.alive = False
                         pause = False
                     elif event.type == KEYDOWN and event.key == K_SPACE:
                         pause = False
